@@ -11,6 +11,8 @@ With this data, we can extract the x, y positions of players, along with damage 
 * Set up venv then: $ pip install -r requirements.txt 
 
 ### Example: Zain Vs. Jmook Game 4, Shine 2022 Grand Finals
+The solid bubbles represent the character, and the surrounding bubbles that grow with time is the damage taken. The solid line illustrates the distance between each player at any given time. 
+
 <img src="Output/Game_20220828T225101.gif" alt="Aw Yeah" width="500">
 
 ### Known Issues
