@@ -24,13 +24,13 @@ matplotlib.use('agg')
 
 
 class SlippiScatter:
-    def __init__(self, temp_images_dir="Temp_images", figure_size=(8, 8), verbose=False):
+    def __init__(self, game=None, gif_title=None, temp_images_dir="Temp_images", figure_size=(8, 8), verbose=False):
         """Initializes class and set game, directories, plot size"""
         # Set directories and dataframe placeholder
         self.temp_images_dir = temp_images_dir  # where images will be temporarily stored
         self.df = None
-        self.game = None
-        self.title = None
+        self.game = game
+        self.gif_title = gif_title
 
         # Matplotlib settings
         self.figure_size = figure_size
@@ -51,7 +51,7 @@ class SlippiScatter:
         if self.verbose:
             print("Saving to GIF...please wait \n")
         # Save to GIF (this can take some time depending on pc & game length
-        frames[0].save(f"Output/{self.title}Game_20220828T225101.gif", format="GIF", append_images=frames[1:],
+        frames[0].save(f"Output/{self.gif_title}.gif", format="GIF", append_images=frames[1:],
                        save_all=True, duration=30, loop=0)
 
         if self.verbose:
@@ -100,8 +100,8 @@ class SlippiScatter:
             plt.scatter(x1, y1, s=150, marker='o', c='#f689db', zorder=4)
             plt.scatter(x2, y2, s=150, marker='o', c='#4d7ff8', zorder=5)
             # Plot damage bubble
-            plt.scatter(x1, y1, s=p1_damage, marker='o', c='#7de2fb', zorder=2)
-            plt.scatter(x2, y2, s=p2_damage, marker='o', c='#f689db', zorder=3)
+            plt.scatter(x1, y1, s=p1_damage, marker='o', c='#7de2fb', alpha=0.35, zorder=2)
+            plt.scatter(x2, y2, s=p2_damage, marker='o', c='#f689db', alpha=0.35, zorder=3)
             # Set title
             plt.title(f"Frame {row}")
             plt.tight_layout()
@@ -160,8 +160,6 @@ class SlippiScatter:
         if verbose:
             self.verbose = True
 
-        self.title = game
-
         # Check if game is set, else create game
         if not self.game:
             self.game = Game(game)
@@ -180,5 +178,6 @@ class SlippiScatter:
 
 # Example
 # Initialize class, run analysis
-slsc = SlippiScatter()
+slsc = SlippiScatter(gif_title="zain_jmook_g4_Shine2022_GFs")
 slsc.run_analysis(game="Slippi_Input/Stream-Game_20220828T225101.slp", verbose=True)
+
